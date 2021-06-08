@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="billboard.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="keyboard.cpp" />
@@ -27,12 +28,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="manager.cpp" />
     <ClCompile Include="object.cpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="polygon2d.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="scene3d.cpp" />
     <ClCompile Include="testObj.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="billboard.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="keyboard.h" />
@@ -41,6 +44,7 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="manager.h" />
     <ClInclude Include="object.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="polygon2d.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="scene3d.h" />

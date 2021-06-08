@@ -17,13 +17,14 @@
 #include "light.h"
 
 #include "testObj.h"
+#include "player.h"
 
 //*****************************************************************************
 // ê√ìIÉÅÉìÉoïœêîêÈåæ
 //*****************************************************************************
-CRenderer * CManager::m_pRenderer = NULL;
-CInputKeyboard * CManager::m_pInput = NULL;
-CCamera * CManager::m_pCamera = NULL;
+CRenderer *CManager::m_pRenderer = NULL;
+CInputKeyboard *CManager::m_pInput = NULL;
+CCamera *CManager::m_pCamera = NULL;
 CLight *CManager::m_pLight = NULL;
 
 //=============================================================================
@@ -73,6 +74,8 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 	CTestObj::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	CTestObj::Create(D3DXVECTOR3(300.0f, 0.0f, -300.0f));
 	CTestObj::Create(D3DXVECTOR3(-300.0f, 0.0f, 300.0f));
+
+	CPlayer::Create(D3DXVECTOR3(0.0f, 300.0f, 0.0f), D3DXVECTOR3(300.0f, 300.0f, 0.0f));
 
 	return 0;
 }

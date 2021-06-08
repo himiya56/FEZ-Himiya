@@ -120,7 +120,7 @@ void CTestObj::Unload(void)
 // インスタンス生成処理
 // Author : 樋宮匠
 //=============================================================================
-CTestObj * CTestObj::Create(D3DXVECTOR3 pos)
+CTestObj *CTestObj::Create(D3DXVECTOR3 pos)
 {
 	CTestObj *pCube = NULL;
 	pCube = new CTestObj;
