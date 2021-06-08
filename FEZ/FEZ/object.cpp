@@ -13,25 +13,112 @@
 //*****************************************************************************
 // 静的メンバ変数宣言
 //*****************************************************************************
-CObject * CObject::m_apObject[MAX_POLYGON] = {};
 int CObject::m_nNumAll = 0;
+int CObject::m_nNumObj[CObject::OBJ_TYPE_MAX] = {};
+
+CObject *CObject::m_pTop[CObject::OBJ_TYPE_MAX] = {};
+CObject *CObject::m_pCur[CObject::OBJ_TYPE_MAX] = {};
 
 //=============================================================================
 // コンストラクタ
 //=============================================================================
 CObject::CObject()
 {
-	for (int nCount = 0; nCount < MAX_POLYGON; nCount++)
+	// オブジェクトの種類を指定がないのでNONEにする
+	m_type = OBJ_TYPE_NONE;
+
+	// 先頭がないなら、先頭に
+	if (m_pTop[m_type] == NULL)
 	{
-		if (m_apObject[nCount] == NULL)
-		{
-			// メモリの確保
-			m_apObject[nCount] = this;
-			m_nNumIndex = nCount;
-			m_nNumAll++;
-			break;
-		}
+		m_pTop[m_type] = this;
 	}
+
+	// 現在における最新のオブジェクトがないなら、最新に
+	if (m_pCur[m_type] == NULL)
+	{
+		m_pCur[m_type] = this;
+	}
+
+	// 現在のオブジェクトの次のオブジェクトを、自分にする
+	m_pCur[m_type]->m_pNext = this;
+
+	// 現在のオブジェクトが自分の場合
+	if (m_pCur[m_type] == this)
+	{
+		// 自分の前のオブジェクトを、NULLにする
+		m_pPrev = NULL;
+	}
+	else
+	{
+		// 自分の前のオブジェクトを、現在のオブジェクトにする
+		m_pPrev = m_pCur[m_type];
+	}
+
+	// 現在のオブジェクトを、自分にする
+	m_pCur[m_type] = this;
+
+	// 自分の次のオブジェクトを、NULLにする
+	m_pNext = NULL;
+
+	// 増えたオブジェクトをカウント
+	m_nNumObj[m_type]++;
+
+	// 全体の数をインクリメント
+	m_nNumAll++;
+
+	// 使用するフラグをtrueに
+	m_bUse = true;
+}
+
+//=============================================================================
+// オーバーライドされたコンストラクタ
+//=============================================================================
+CObject::CObject(OBJ_TYPE objType)
+{
+	// オブジェクトの種類を指定
+	m_type = objType;
+
+	// 先頭がないなら、先頭に
+	if (m_pTop[m_type] == NULL)
+	{
+		m_pTop[m_type] = this;
+	}
+
+	// 現在における最新のオブジェクトがないなら、最新に
+	if (m_pCur[m_type] == NULL)
+	{
+		m_pCur[m_type] = this;
+	}
+
+	// 現在のオブジェクトの次のオブジェクトを、自分にする
+	m_pCur[m_type]->m_pNext = this;
+
+	// 現在のオブジェクトが自分の場合
+	if (m_pCur[m_type] == this)
+	{
+		// 自分の前のオブジェクトを、NULLにする
+		m_pPrev = NULL;
+	}
+	else
+	{
+		// 自分の前のオブジェクトを、現在のオブジェクトにする
+		m_pPrev = m_pCur[m_type];
+	}
+
+	// 現在のオブジェクトを、自分にする
+	m_pCur[m_type] = this;
+
+	// 自分の次のオブジェクトを、NULLにする
+	m_pNext = NULL;
+
+	// 増えたオブジェクトをカウント
+	m_nNumObj[m_type]++;
+
+	// 全体の数をインクリメント
+	m_nNumAll++;
+
+	// 使用するフラグをtrueに
+	m_bUse = true;
 }
 
 //=============================================================================
@@ -46,11 +133,34 @@ CObject::~CObject()
 //=============================================================================
 void CObject::UpdateAll(void)
 {
-	for (int nCount = 0; nCount < MAX_POLYGON; nCount++)
+	for (int nCnt = 0; nCnt < OBJ_TYPE_MAX; nCnt++)
 	{
-		if (m_apObject[nCount] != NULL)
+		// 先頭、最新のものがあるなら
+		if (m_pTop[nCnt] != NULL && m_pCur[nCnt] != NULL)
 		{
-			m_apObject[nCount]->Update();
+			// 記憶用の変数
+			CObject*pObj = m_pTop[nCnt];
+
+			do
+			{
+				// 記憶用の変数(Update中に、Uninitされることを考慮)
+				CObject*pNextScene = pObj->m_pNext;
+
+				// 更新処理
+				pObj->Update();
+
+				// 使用フラグがfalseなら
+				if (pObj->m_bUse == false)
+				{
+					// メモリの開放
+					delete pObj;
+					pObj = NULL;
+				}
+
+				// 次のシーンに変えていく
+				pObj = pNextScene;
+
+			} while (pObj != NULL);
 		}
 	}
 }
@@ -60,13 +170,29 @@ void CObject::UpdateAll(void)
 //=============================================================================
 void CObject::DrawAll(void)
 {
-	for (int nCount = 0; nCount < MAX_POLYGON; nCount++)
+	for (int nCnt = 0; nCnt < OBJ_TYPE_MAX; nCnt++)
 	{
-		if (m_apObject[nCount] != NULL)
+		// 先頭、最新のものがあるなら
+		if (m_pTop[nCnt] != NULL && m_pCur[nCnt] != NULL)
 		{
-			m_apObject[nCount]->Draw();
+			// 記憶用の変数
+			CObject*pObj = m_pTop[nCnt];
+
+			do
+			{
+				// 描画処理
+				pObj->Draw();
+
+				// 次のシーンに変えていく
+				pObj = pObj->m_pNext;
+
+			} while (pObj != NULL);
 		}
 	}
+
+	// デバッグ用
+	int nDebug = m_nNumAll;
+	nDebug = nDebug;
 }
 
 //=============================================================================
@@ -74,37 +200,36 @@ void CObject::DrawAll(void)
 //=============================================================================
 void CObject::ReleaseAll(void)
 {
-	for (int nCount = 0; nCount < MAX_POLYGON; nCount++)
+	for (int nCnt = 0; nCnt < OBJ_TYPE_MAX; nCnt++)
 	{
-		if (m_apObject[nCount] != NULL)
+		// 先頭、最新のものがあるなら
+		if (m_pTop[nCnt] != NULL && m_pCur[nCnt] != NULL)
 		{
-			m_apObject[nCount]->Uninit();
+			// 記憶用の変数
+			CObject*pObj = m_pTop[nCnt];
+
+			do
+			{
+				// 記憶用の変数
+				CObject*pNextScene = pObj->m_pNext;
+
+				// 終了処理
+				pObj->Uninit();
+
+				// 使用フラグがfalseなら
+				if (pObj->m_bUse == false)
+				{
+					// メモリの開放
+					delete pObj;
+					pObj = NULL;
+				}
+
+				// 次のシーンに変えていく
+				pObj = pNextScene;
+
+			} while (pObj != NULL);
 		}
 	}
-}
-
-//=============================================================================
-// オブジェクトタイプ設定処理
-//=============================================================================
-void CObject::SetObjType(const OBJ_TYPE type)
-{
-	m_Type = type;
-}
-
-//=============================================================================
-// オブジェクトタイプ取得処理
-//=============================================================================
-CObject::OBJ_TYPE CObject::GetObjType(void)
-{
-	return m_Type;
-}
-
-//=============================================================================
-// オブジェクト取得処理
-//=============================================================================
-CObject * CObject::GetObj(int nIndex)
-{
-	return m_apObject[nIndex];
 }
 
 //=============================================================================
@@ -112,10 +237,57 @@ CObject * CObject::GetObj(int nIndex)
 //=============================================================================
 void CObject::Release(void)
 {
-	// メンバ変数を保持
-	int nNum = m_nNumIndex;
-	// メモリの破棄
-	delete m_apObject[nNum];
-	m_apObject[nNum] = NULL;
-	m_nNumAll--;
+	// 中身があるなら、
+	if (this != NULL)
+	{
+		// 先頭なら
+		if (this == m_pTop[m_type])
+		{
+			// 次の中身があるなら
+			if (m_pNext != NULL)
+			{
+				// 次のものの前の情報を、NULLに
+				m_pNext->m_pPrev = NULL;
+
+				// それを先頭に
+				m_pTop[m_type] = m_pNext;
+			}
+			else
+			{
+				// 先頭の次がないなら、先頭と現在を示すポインタをNULLに
+				m_pTop[m_type] = NULL;
+				m_pCur[m_type] = NULL;
+			}
+		}
+		// 先頭でないなら
+		else
+		{
+			// 次の中身があるなら
+			if (m_pNext != NULL)
+			{
+				// 前のものの次の情報を、自身の次の情報に
+				m_pPrev->m_pNext = m_pNext;
+
+				// 次のものの前の情報を、自身の前の情報に
+				m_pNext->m_pPrev = m_pPrev;
+			}
+			else
+			{
+				// 前のものの次の情報を、なくす
+				m_pPrev->m_pNext = NULL;
+
+				// 現在の最新のものを、前の情報に
+				m_pCur[m_type] = m_pPrev;
+			}
+		}
+
+		// 使用フラグをfalseに
+		m_bUse = false;
+
+		// 種類ごとの総数を減らす
+		m_nNumObj[m_type]--;
+
+		// 全体の数をデクリメント
+		m_nNumAll--;
+	}
 }

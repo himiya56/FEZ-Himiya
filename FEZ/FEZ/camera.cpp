@@ -33,6 +33,8 @@ CCamera::CCamera()
 	m_fHorizontalAngle = D3DXToRadian(90);
 	m_fOffset = INIT_OFFSET;
 	m_fFOV = 90.0f;
+	m_rotDir = ROTATE_NONE;
+	m_nCountFrame = 0;
 }
 
 //=============================================================================
@@ -53,11 +55,12 @@ HRESULT CCamera::Init(void)
 	m_posR = DEFAULT_VECTOR;
 	m_vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 	m_fFOV = 90.0f;
+	m_FollowPos = DEFAULT_VECTOR;
 
 	D3DXMatrixLookAtLH(&m_mtxView, &m_posV, &m_posR, &m_vecU);
 	pDevice->SetTransform(D3DTS_VIEW, &m_mtxView);
 
-	D3DXMatrixPerspectiveFovLH(&m_mtxProjection, D3DXToRadian(m_fFOV), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 10.0f, 2000.0f);
+	D3DXMatrixPerspectiveFovLH(&m_mtxProjection, D3DXToRadian(m_fFOV), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 10.0f, 10000.0f);
 	pDevice->SetTransform(D3DTS_PROJECTION, &m_mtxProjection);
 
 	return S_OK;
@@ -78,31 +81,26 @@ void CCamera::Update(void)
 	// キーボードを取得
 	CInputKeyboard *pKeyboard = CManager::GetInput();
 
-	// Aキーで左回転
-	if (pKeyboard->GetKeyboardPress(DIK_D))
+	if (m_rotDir == ROTATE_NONE)
 	{
-		m_fVerticalAngle -= D3DXToRadian(1.0f);
-		// 0度以下にならないように
-		if (m_fVerticalAngle <= 0.0f)
+		// Aキーで左回転
+		if (pKeyboard->GetKeyboardTrigger(DIK_D))
 		{
-			m_fVerticalAngle = D3DXToRadian(360.0f);
+			m_rotDir = ROTATE_RIGHT;
 		}
-	}
-	// Dキーで右回転
-	if (pKeyboard->GetKeyboardPress(DIK_A))
-	{
-		m_fVerticalAngle += D3DXToRadian(1.0f);
-		// 360度以上にならないように
-		if (m_fVerticalAngle >= D3DXToRadian(360.0f))
+		// Dキーで右回転
+		if (pKeyboard->GetKeyboardTrigger(DIK_A))
 		{
-			m_fVerticalAngle = D3DXToRadian(0.0f);
+			m_rotDir = ROTATE_LEFT;
 		}
 	}
 
+	RotateCamera(m_rotDir);
+
 	// 目的地の計算(球面座標)
-	m_posRDest.x = m_fOffset * (sinf(m_fHorizontalAngle) * cosf(m_fVerticalAngle));
-	m_posRDest.y = m_fOffset * cosf(m_fHorizontalAngle);
-	m_posRDest.z = m_fOffset * (sinf(m_fHorizontalAngle) * sinf(m_fVerticalAngle));
+	m_posVDest.x = m_fOffset * (sinf(m_fHorizontalAngle) * cosf(m_fVerticalAngle));
+	m_posVDest.y = m_fOffset * cosf(m_fHorizontalAngle);
+	m_posVDest.z = m_fOffset * (sinf(m_fHorizontalAngle) * sinf(m_fVerticalAngle));
 
 	// 目的地に近づける
 	m_posR += (m_posRDest - m_posR) * 0.9f;
@@ -136,6 +134,43 @@ void CCamera::SetCamera(void)
 	//D3DXMatrixPerspectiveFovLH(&m_mtxProjection, D3DXToRadian(m_fFOV), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 10.0f, 10000.0f);
 	D3DXMatrixOrthoLH(&m_mtxProjection, SCREEN_WIDTH, SCREEN_HEIGHT, 10.0f, 10000.0f);
 	pDevice->SetTransform(D3DTS_PROJECTION, &m_mtxProjection);
+}
+
+//=============================================================================
+// カメラを90度回転させる処理
+//=============================================================================
+void CCamera::RotateCamera(ROTATE dir)
+{
+	if (dir != ROTATE_NONE)
+	{
+		switch (dir)
+		{
+		case ROTATE_RIGHT:
+			m_fVerticalAngle += D3DXToRadian(CAMERA_ROTATE_ANGLE / CAMERA_ROTATE_FRAME_LENGTH);
+			if (m_fVerticalAngle >= D3DXToRadian(360))
+			{
+				m_fVerticalAngle = 0;
+			}
+			break;
+
+		case ROTATE_LEFT:
+			m_fVerticalAngle -= D3DXToRadian(CAMERA_ROTATE_ANGLE / CAMERA_ROTATE_FRAME_LENGTH);
+			if (m_fVerticalAngle >= D3DXToRadian(360))
+			{
+				m_fVerticalAngle = 0;
+			}
+			break;
+		default:
+			break;
+		}
+
+		m_nCountFrame++;
+		if (m_nCountFrame >= CAMERA_ROTATE_FRAME_LENGTH)
+		{
+			m_nCountFrame = 0;
+			m_rotDir = ROTATE_NONE;
+		}
+	}
 }
 
 //=============================================================================

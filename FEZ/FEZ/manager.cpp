@@ -70,7 +70,9 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 	// テクスチャの読み込み
 	Load();
 
-	CTestObj::Create(DEFAULT_VECTOR);
+	CTestObj::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	CTestObj::Create(D3DXVECTOR3(300.0f, 0.0f, -300.0f));
+	CTestObj::Create(D3DXVECTOR3(-300.0f, 0.0f, 300.0f));
 
 	return 0;
 }

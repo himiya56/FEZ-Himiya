@@ -21,10 +21,6 @@
 class CObject
 {
 public:
-	// メンバ関数
-	CObject();
-	virtual ~CObject();
-
 	// 列挙型宣言
 	typedef enum
 	{
@@ -32,25 +28,36 @@ public:
 		OBJ_TYPE_MAX
 	}OBJ_TYPE;
 
+	// メンバ関数
+	CObject();
+	CObject(OBJ_TYPE objType);
+	virtual ~CObject();
 	// 純粋仮想関数
 	virtual HRESULT Init(void) = 0;
 	virtual void Uninit(void) = 0;
 	virtual void Update(void) = 0;
 	virtual void Draw(void) = 0;
+
 	static  void UpdateAll(void);
 	static  void DrawAll(void);
 	static  void ReleaseAll(void);	// 全オブジェクト破棄関数
-	static	CObject *GetObj(int nIndex);
-	void SetObjType(const OBJ_TYPE type); // オブジェクトタイプを設定
-	OBJ_TYPE GetObjType(void);			 // オブジェクトタイプの取得
+
+	static  int GetNumObj(OBJ_TYPE objType) {return m_nNumObj[objType]; }
+	static  CObject*GetTopObj(OBJ_TYPE objType) { return m_pTop[objType]; }
+	CObject* GetNextObj(void) { return m_pNext; }
 protected:
 	void Release(void);		// オブジェクト破棄関数
-	OBJ_TYPE m_Type;
 private:
-	// メンバ変数
-	static CObject *m_apObject[MAX_POLYGON]; // Objectインスタンス
-	static int		m_nNumAll;				 // 生成されたObject派生クラスのインスタンスの数
-	int m_nNumIndex;
+	static CObject *m_pTop[OBJ_TYPE_MAX];
+	static CObject *m_pCur[OBJ_TYPE_MAX];
+	CObject *m_pPrev;
+	CObject *m_pNext;
+
+	static int m_nNumAll;
+	static int m_nNumObj[OBJ_TYPE_MAX];
+	OBJ_TYPE	m_type;
+
+	bool m_bUse;
 };
 
 #endif

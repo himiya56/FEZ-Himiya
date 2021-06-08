@@ -23,6 +23,7 @@ class CPolygon2D : public CObject
 public:
 	// メンバ関数
 	CPolygon2D();									// コンストラクタ
+	CPolygon2D(OBJ_TYPE objType);									// コンストラクタ
 	~CPolygon2D();									// デストラクタ
 	HRESULT Init(void);								// 初期化処理
 	void Uninit(void);								// 終了処理

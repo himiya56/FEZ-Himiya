@@ -35,6 +35,24 @@ CScene3D::CScene3D()
 }
 
 //=============================================================================
+// オーバーライドコンストラクタ
+//=============================================================================
+CScene3D::CScene3D(OBJ_TYPE objType) :CObject(objType)
+{
+	m_pTexture = NULL;
+	m_pBuffMat = NULL;
+	m_pMesh = NULL;
+	m_nNumMat = 0;
+	D3DXMatrixIdentity(&m_mtxWorld);
+	D3DXMatrixIdentity(&m_mtxRotate);
+	m_pos = DEFAULT_VECTOR;
+	m_rot = DEFAULT_VECTOR;
+	m_scale = DEFAULT_SCALE;
+	m_collisionSize = DEFAULT_VECTOR;
+	m_bCollision = false;
+}
+
+//=============================================================================
 // デストラクタ
 //=============================================================================
 CScene3D::~CScene3D()

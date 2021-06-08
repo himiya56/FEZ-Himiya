@@ -27,6 +27,7 @@ class CScene3D : public CObject
 {
 public:
     CScene3D();
+	CScene3D(OBJ_TYPE objType);
     virtual ~CScene3D();
 
     virtual HRESULT Init(void);
