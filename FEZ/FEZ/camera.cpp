@@ -34,7 +34,10 @@ CCamera::CCamera()
 	m_fOffset = INIT_OFFSET;
 	m_fFOV = 90.0f;
 	m_rotDir = ROTATE_NONE;
-	m_nCountFrame = 0;
+	m_rotDirOld = m_rotDir;
+	m_nRotateCountFrame = 0;
+	m_Orientation = ORIENTATION_FRONT;
+	m_nOrientation = m_Orientation;
 }
 
 //=============================================================================
@@ -80,22 +83,24 @@ void CCamera::Update(void)
 {
 	// キーボードを取得
 	CInputKeyboard *pKeyboard = CManager::GetInput();
+	m_rotDirOld = m_rotDir;
 
 	if (m_rotDir == ROTATE_NONE)
 	{
-		// Aキーで左回転
-		if (pKeyboard->GetKeyboardTrigger(DIK_D))
+		// Aキーで右回転
+		if (pKeyboard->GetKeyboardTrigger(DIK_A))
 		{
 			m_rotDir = ROTATE_RIGHT;
 		}
-		// Dキーで右回転
-		if (pKeyboard->GetKeyboardTrigger(DIK_A))
+		// Dキーで左回転
+		if (pKeyboard->GetKeyboardTrigger(DIK_D))
 		{
 			m_rotDir = ROTATE_LEFT;
 		}
 	}
 
 	RotateCamera(m_rotDir);
+	OrientationControl(m_rotDir);
 
 	// 目的地の計算(球面座標)
 	m_posVDest.x = m_fOffset * (sinf(m_fHorizontalAngle) * cosf(m_fVerticalAngle));
@@ -131,8 +136,8 @@ void CCamera::SetCamera(void)
 	D3DXMatrixLookAtLH(&m_mtxView, &m_posV, &m_posR, &m_vecU);
 	pDevice->SetTransform(D3DTS_VIEW, &m_mtxView);
 
-	//D3DXMatrixPerspectiveFovLH(&m_mtxProjection, D3DXToRadian(m_fFOV), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 10.0f, 10000.0f);
-	D3DXMatrixOrthoLH(&m_mtxProjection, SCREEN_WIDTH, SCREEN_HEIGHT, 10.0f, 10000.0f);
+	D3DXMatrixPerspectiveFovLH(&m_mtxProjection, D3DXToRadian(m_fFOV), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 10.0f, 10000.0f);
+	//D3DXMatrixOrthoLH(&m_mtxProjection, SCREEN_WIDTH, SCREEN_HEIGHT, 10.0f, 10000.0f);
 	pDevice->SetTransform(D3DTS_PROJECTION, &m_mtxProjection);
 }
 
@@ -141,8 +146,7 @@ void CCamera::SetCamera(void)
 //=============================================================================
 void CCamera::RotateCamera(ROTATE dir)
 {
-	if (dir != ROTATE_NONE)
-	{
+	if (dir != ROTATE_NONE) {
 		switch (dir)
 		{
 		case ROTATE_RIGHT:
@@ -160,17 +164,44 @@ void CCamera::RotateCamera(ROTATE dir)
 				m_fVerticalAngle = 0;
 			}
 			break;
+
 		default:
 			break;
 		}
 
-		m_nCountFrame++;
-		if (m_nCountFrame >= CAMERA_ROTATE_FRAME_LENGTH)
+		m_nRotateCountFrame++;
+		if (m_nRotateCountFrame >= CAMERA_ROTATE_FRAME_LENGTH)
 		{
-			m_nCountFrame = 0;
+			m_nRotateCountFrame = 0;
 			m_rotDir = ROTATE_NONE;
 		}
 	}
+}
+
+//=============================================================================
+// どの方向から見ているかを制御
+//=============================================================================
+void CCamera::OrientationControl(ROTATE dir) {
+	if (dir != ROTATE_NONE && m_rotDirOld == ROTATE_NONE) {
+		switch (dir) {
+		case ROTATE_RIGHT:
+			if (++m_nOrientation >= ORIENTATION_MAX) {
+				m_nOrientation = ORIENTATION_BACK;
+			}
+			break;
+
+		case ROTATE_LEFT:
+			if (--m_nOrientation < 0) {
+				m_nOrientation = ORIENTATION_MAX - 1;
+			}
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	m_Orientation = ORIENTATION(m_nOrientation);
 }
 
 //=============================================================================

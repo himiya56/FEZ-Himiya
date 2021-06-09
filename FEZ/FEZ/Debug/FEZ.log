@@ -1,0 +1,21 @@
+﻿  camera.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  コードを生成中...
+  コンパイル中...
+  renderer.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\gsp028\desktop\授業\プログラム\visual_studio_2015\projects\2年\c++\game creation practice\fez\fez\renderer.cpp(221): warning C4101: 'str': ローカル変数は 1 度も使われていません。
+  player.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  manager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  コードを生成中...
+  スキップ中... (関連する変更は検出されませんでした)
+  testObj.cpp
+  scene3d.cpp
+  polygon2d.cpp
+  object.cpp
+  light.cpp
+  billboard.cpp
+  FEZ.vcxproj -> C:\Users\gsp028\Desktop\授業\プログラム\Visual_Studio_2015\Projects\2年\C++\Game Creation Practice\FEZ\Debug\FEZ.exe
+  FEZ.vcxproj -> C:\Users\gsp028\Desktop\授業\プログラム\Visual_Studio_2015\Projects\2年\C++\Game Creation Practice\FEZ\Debug\FEZ.pdb (Full PDB)

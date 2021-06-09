@@ -11,6 +11,7 @@
 #include "renderer.h"
 #include "object.h"
 #include "keyboard.h"
+#include "camera.h"
 
 //*****************************************************************************
 // 静的メンバ変数宣言
@@ -24,6 +25,7 @@ CRenderer::CRenderer()
 	m_pD3D = NULL;			// Direct3Dオブジェクト
 	m_pD3DDevice = NULL;	// Deviceオブジェクト(描画に必要)
 	m_pFont = NULL;			// フォントへのポインタ
+	m_pCamera = new CCamera;
 }
 
 //=============================================================================
@@ -197,6 +199,8 @@ void CRenderer::Draw(void)
 		// FPS表示
 		DrawFPS();
 #endif
+		DrawOrientation();
+
 		// Direct3Dによる描画の終了
 		m_pD3DDevice->EndScene();
 
@@ -222,3 +226,34 @@ void CRenderer::DrawFPS(void)
 	//m_pFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff, 0xff, 0xff, 0xff));
 }
 #endif
+
+void CRenderer::DrawOrientation(void) {
+	RECT rect = { 0, 500, SCREEN_WIDTH, SCREEN_HEIGHT };
+	char str[256];
+	CCamera::ORIENTATION Orientation = m_pCamera->GetOrientation();
+
+	switch (Orientation) {
+	case CCamera::ORIENTATION_BACK:
+		wsprintf(str, "BACK %d", Orientation);
+		break;
+
+	case CCamera::ORIENTATION_FRONT:
+		wsprintf(str, "FRONT %d", Orientation);
+		break;
+
+	case CCamera::ORIENTATION_LEFT:
+		wsprintf(str, "LEFT %d", Orientation);
+		break;
+
+	case CCamera::ORIENTATION_RIGHT:
+		wsprintf(str, "RIGHT %d", Orientation);
+		break;
+
+	default:
+		wsprintf(str, "NULL %d", Orientation);
+		break;
+	}
+
+	//テキスト描画
+	m_pFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff, 0xff, 0xff, 0xff));
+}
