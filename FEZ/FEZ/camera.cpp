@@ -136,8 +136,8 @@ void CCamera::SetCamera(void)
 	D3DXMatrixLookAtLH(&m_mtxView, &m_posV, &m_posR, &m_vecU);
 	pDevice->SetTransform(D3DTS_VIEW, &m_mtxView);
 
-	D3DXMatrixPerspectiveFovLH(&m_mtxProjection, D3DXToRadian(m_fFOV), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 10.0f, 10000.0f);
-	//D3DXMatrixOrthoLH(&m_mtxProjection, SCREEN_WIDTH, SCREEN_HEIGHT, 10.0f, 10000.0f);
+	//D3DXMatrixPerspectiveFovLH(&m_mtxProjection, D3DXToRadian(m_fFOV), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 10.0f, 10000.0f);
+	D3DXMatrixOrthoLH(&m_mtxProjection, SCREEN_WIDTH, SCREEN_HEIGHT, 10.0f, 10000.0f);
 	pDevice->SetTransform(D3DTS_PROJECTION, &m_mtxProjection);
 }
 

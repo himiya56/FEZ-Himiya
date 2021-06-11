@@ -10,8 +10,10 @@
 //*****************************************************************************
 #include "renderer.h"
 #include "object.h"
+
 #include "keyboard.h"
 #include "camera.h"
+#include "manager.h"
 
 //*****************************************************************************
 // 静的メンバ変数宣言
@@ -25,7 +27,6 @@ CRenderer::CRenderer()
 	m_pD3D = NULL;			// Direct3Dオブジェクト
 	m_pD3DDevice = NULL;	// Deviceオブジェクト(描画に必要)
 	m_pFont = NULL;			// フォントへのポインタ
-	m_pCamera = new CCamera;
 }
 
 //=============================================================================
@@ -230,6 +231,7 @@ void CRenderer::DrawFPS(void)
 void CRenderer::DrawOrientation(void) {
 	RECT rect = { 0, 500, SCREEN_WIDTH, SCREEN_HEIGHT };
 	char str[256];
+	m_pCamera = CManager::GetCamera();
 	CCamera::ORIENTATION Orientation = m_pCamera->GetOrientation();
 
 	switch (Orientation) {

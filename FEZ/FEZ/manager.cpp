@@ -75,7 +75,7 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 	CTestObj::Create(D3DXVECTOR3(300.0f, 0.0f, -300.0f));
 	CTestObj::Create(D3DXVECTOR3(-300.0f, 0.0f, 300.0f));
 
-	CPlayer::Create(D3DXVECTOR3(0.0f, 300.0f, 0.0f), D3DXVECTOR3(300.0f, 300.0f, 0.0f));
+	CPlayer::Create(D3DXVECTOR3(0.0f, 170.0f, 0.0f), D3DXVECTOR3(150.0f, 150.0f, 0.0f));
 
 	return 0;
 }

@@ -38,6 +38,7 @@ public:
 
 private:
 	D3DXVECTOR3 m_pos;
+	float m_move;
 
 	CCamera *m_pCamera;
 };
