@@ -21,6 +21,11 @@
 #define CAMERA_ROTATE_FRAME_LENGTH 90 // カメラを90度回転させるまでのフレーム数
 #define CAMERA_ROTATE_ANGLE 90 // 一回の回転で回す角度
 
+//*****************************************************************************
+// 前方宣言
+//*****************************************************************************
+class CInputKeyboard;
+
 //================================================
 // ライトクラス宣言
 //================================================
@@ -58,12 +63,14 @@ public:
 	void SetTargetPos(D3DXVECTOR3 pos) { m_posR = pos; }	// 注視点設定
 	void SetPos(D3DXVECTOR3 pos) { m_posV = pos; }			// 座標設定
 	void SetFOV(float fFOV) { m_fFOV = fFOV; }				// 視野角設定
+	void DecisionRotate(CInputKeyboard *pInputKeyboard);
 
 	static CCamera *Create(void);
 
 	ROTATE GetRotake(void) { return m_rotDir; }
 	ROTATE GetRotakeOld(void) { return m_rotDirOld; }
 	ORIENTATION GetOrientation(void) { return m_Orientation; }
+
 	D3DXVECTOR3 GetTargtPos(void) { return m_posR; }		// 注視点取得
 	D3DXVECTOR3 GetPos(void) { return m_posV; }				// 座標取得
 

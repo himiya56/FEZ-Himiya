@@ -85,19 +85,7 @@ void CCamera::Update(void)
 	CInputKeyboard *pKeyboard = CManager::GetInput();
 	m_rotDirOld = m_rotDir;
 
-	if (m_rotDir == ROTATE_NONE)
-	{
-		// Aキーで右回転
-		if (pKeyboard->GetKeyboardTrigger(DIK_A))
-		{
-			m_rotDir = ROTATE_RIGHT;
-		}
-		// Dキーで左回転
-		if (pKeyboard->GetKeyboardTrigger(DIK_D))
-		{
-			m_rotDir = ROTATE_LEFT;
-		}
-	}
+	DecisionRotate(pKeyboard);
 
 	RotateCamera(m_rotDir);
 	OrientationControl(m_rotDir);
@@ -207,10 +195,29 @@ void CCamera::OrientationControl(ROTATE dir) {
 //=============================================================================
 // カメラ生成
 //=============================================================================
-CCamera * CCamera::Create(void)
+CCamera *CCamera::Create(void)
 {
 	CCamera *pCamera;
 	pCamera = new CCamera;
 	pCamera->Init();
 	return pCamera;
+}
+
+//=============================================================================
+// 回転方向を決定
+//=============================================================================
+void CCamera::DecisionRotate(CInputKeyboard *pInputKeyboard) {
+	if (m_rotDir == ROTATE_NONE)
+	{
+		// Aキーで右回転
+		if (pInputKeyboard->GetKeyboardTrigger(DIK_A))
+		{
+			m_rotDir = ROTATE_RIGHT;
+		}
+		// Dキーで左回転
+		if (pInputKeyboard->GetKeyboardTrigger(DIK_D))
+		{
+			m_rotDir = ROTATE_LEFT;
+		}
+	}
 }
