@@ -62,11 +62,11 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 	}
 
 	// ƒ‰ƒCƒg‚Ì¶¬
-	//m_pLight = new CLight;
-	//if (FAILED(m_pLight->Init()))
-	//{
-	//	return E_FAIL;
-	//}
+	m_pLight = new CLight;
+	if (FAILED(m_pLight->Init()))
+	{
+		return E_FAIL;
+	}
 
 	m_pCamera = CCamera::Create();
 

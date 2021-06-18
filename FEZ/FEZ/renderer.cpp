@@ -107,7 +107,7 @@ HRESULT CRenderer::Init(HWND hWnd, bool bWindow)
 	m_pD3DDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
 	m_pD3DDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	m_pD3DDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-	m_pD3DDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
+	m_pD3DDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
 	m_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
 	m_pD3DDevice->SetRenderState(D3DRS_ALPHAREF, 50);
 	m_pD3DDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
@@ -121,8 +121,8 @@ HRESULT CRenderer::Init(HWND hWnd, bool bWindow)
 	// テクスチャステージステートの設定
 	// ステージ0の設定
 	m_pD3DDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
-	m_pD3DDevice->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_MODULATE);
-	m_pD3DDevice->SetTextureStageState(0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
+	m_pD3DDevice->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_SELECTARG1);
+	//m_pD3DDevice->SetTextureStageState(0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
 
 	m_pD3DDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
 	m_pD3DDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);

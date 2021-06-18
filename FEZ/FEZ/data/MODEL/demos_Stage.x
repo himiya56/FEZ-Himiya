@@ -2582,7 +2582,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.810000;0.616410;0.000000;;
    TextureFilename {
-    "./data/TEXTURE/-mm_0_0.298701_hikari.png";
+    "./data/TEXTURE/hikari.png";
    }
   }
  }

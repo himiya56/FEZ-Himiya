@@ -20,7 +20,7 @@ HRESULT CPlayer::Init(void) {
 
 	CBillboard::Init();
 	m_move = MOVE_SIZ;
-	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/Character1.1.png", &m_pTexture);
+	D3DXCreateTextureFromFile(pDevice, "./data/TEXTURE/Character1.png", &m_pTexture);
 	BindTexture(m_pTexture);
 
 	return S_OK;
@@ -55,10 +55,12 @@ void CPlayer::Update(void) {
 			// ←キーで左移動
 			if (pKeyboard->GetKeyboardPress(DIK_LEFT)) {
 				m_pos.x += m_move;
+				SetTexUVX(1.0f,0.0f);
 			}
 			// →キーで右移動
 			if (pKeyboard->GetKeyboardPress(DIK_RIGHT)) {
 				m_pos.x -= m_move;
+				SetTexUVX(0.0f, 1.0f);
 			}
 			break;
 
@@ -66,10 +68,12 @@ void CPlayer::Update(void) {
 			// ←キーで左移動
 			if (pKeyboard->GetKeyboardPress(DIK_LEFT)) {
 				m_pos.z += m_move;
+				SetTexUVX(1.0f, 0.0f);
 			}
 			// →キーで右移動
 			if (pKeyboard->GetKeyboardPress(DIK_RIGHT)) {
 				m_pos.z -= m_move;
+				SetTexUVX(0.0f, 1.0f);
 			}
 			break;
 
@@ -77,10 +81,12 @@ void CPlayer::Update(void) {
 			// ←キーで左移動
 			if (pKeyboard->GetKeyboardPress(DIK_LEFT)) {
 				m_pos.x -= m_move;
+				SetTexUVX(1.0f, 0.0f);
 			}
 			// →キーで右移動
 			if (pKeyboard->GetKeyboardPress(DIK_RIGHT)) {
 				m_pos.x += m_move;
+				SetTexUVX(0.0f, 1.0f);
 			}
 			break;
 
@@ -88,10 +94,12 @@ void CPlayer::Update(void) {
 			// ←キーで左移動
 			if (pKeyboard->GetKeyboardPress(DIK_LEFT)) {
 				m_pos.z -= m_move;
+				SetTexUVX(1.0f, 0.0f);
 			}
 			// →キーで右移動
 			if (pKeyboard->GetKeyboardPress(DIK_RIGHT)) {
 				m_pos.z += m_move;
+				SetTexUVX(0.0f, 1.0f);
 			}
 			break;
 		}
