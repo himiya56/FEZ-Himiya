@@ -8,6 +8,7 @@
 // 2重インクルード防止用
 #ifndef _LIBRARY_H_
 #define _LIBRARY_H_
+
 //*****************************************************************************
 // インクルードファイル
 //*****************************************************************************
@@ -41,4 +42,5 @@ int Sum(int nValue, ...);
  char *NumberToChar(const int nNumber);
  char *NumberToChar(const float fNumber);
  float Vec3Length(D3DXVECTOR3 *pVec);
+bool CollisionDetection(D3DXVECTOR3 PlayerPos, D3DXVECTOR3 PlayerSiz, D3DXVECTOR3 BlockPos, D3DXVECTOR3 BlockSiz);
 #endif

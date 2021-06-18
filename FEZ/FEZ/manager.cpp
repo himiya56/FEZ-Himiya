@@ -18,6 +18,7 @@
 
 #include "testObj.h"
 #include "player.h"
+#include "collisiondetection.h"
 
 //*****************************************************************************
 // 静的メンバ変数宣言
@@ -26,6 +27,7 @@ CRenderer *CManager::m_pRenderer = NULL;
 CInputKeyboard *CManager::m_pInput = NULL;
 CCamera *CManager::m_pCamera = NULL;
 CLight *CManager::m_pLight = NULL;
+CPlayer *CManager::m_pPlayer = NULL;
 
 //=============================================================================
 // コンストラクタ
@@ -60,11 +62,11 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 	}
 
 	// ライトの生成
-	m_pLight = new CLight;
-	if (FAILED(m_pLight->Init()))
-	{
-		return E_FAIL;
-	}
+	//m_pLight = new CLight;
+	//if (FAILED(m_pLight->Init()))
+	//{
+	//	return E_FAIL;
+	//}
 
 	m_pCamera = CCamera::Create();
 
@@ -72,10 +74,12 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 	Load();
 
 	CTestObj::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	CTestObj::Create(D3DXVECTOR3(300.0f, 0.0f, -300.0f));
-	CTestObj::Create(D3DXVECTOR3(-300.0f, 0.0f, 300.0f));
+	//CTestObj::Create(D3DXVECTOR3(300.0f, 0.0f, -300.0f));
+	//CTestObj::Create(D3DXVECTOR3(-300.0f, 0.0f, 300.0f));
 
-	CPlayer::Create(D3DXVECTOR3(0.0f, 170.0f, 0.0f), D3DXVECTOR3(150.0f, 150.0f, 0.0f));
+	CCollisionDetection::Create(D3DXVECTOR3(100.0f, 170.0f, 0.0f), D3DXVECTOR3(150.0f, 150.0f, 0.0f), CCamera::ORIENTATION_FRONT);
+
+	m_pPlayer = CPlayer::Create(D3DXVECTOR3(0.0f, 170.0f, 0.0f), D3DXVECTOR3(150.0f, 150.0f, 0.0f));
 
 	return 0;
 }

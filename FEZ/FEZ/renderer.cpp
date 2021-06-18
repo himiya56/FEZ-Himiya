@@ -14,6 +14,7 @@
 #include "keyboard.h"
 #include "camera.h"
 #include "manager.h"
+#include "player.h"
 
 //*****************************************************************************
 // 静的メンバ変数宣言
@@ -201,6 +202,7 @@ void CRenderer::Draw(void)
 		DrawFPS();
 #endif
 		DrawOrientation();
+		DrawPos();
 
 		// Direct3Dによる描画の終了
 		m_pD3DDevice->EndScene();
@@ -255,6 +257,18 @@ void CRenderer::DrawOrientation(void) {
 		wsprintf(str, "NULL %d", Orientation);
 		break;
 	}
+
+	//テキスト描画
+	m_pFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff, 0xff, 0xff, 0xff));
+}
+
+void CRenderer::DrawPos(void) {
+	RECT rect = { 0, 350, SCREEN_WIDTH, SCREEN_HEIGHT };
+	char str[256];
+	m_pPlayer = CManager::GetPlayer();
+	D3DXVECTOR3 pos = m_pPlayer->GetPos();
+
+	wsprintf(str, "%d, %d, %d", int(pos.x), int(pos.y), int(pos.z));
 
 	//テキスト描画
 	m_pFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff, 0xff, 0xff, 0xff));

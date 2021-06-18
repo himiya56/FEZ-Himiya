@@ -33,12 +33,15 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
+	void CollisionDetection(void);
 
 	static CPlayer *Create(D3DXVECTOR3 pos, D3DXVECTOR3 siz);
 
 private:
 	D3DXVECTOR3 m_pos;
 	float m_move;
+
+	static LPDIRECT3DTEXTURE9		m_pTexture;
 
 	CCamera *m_pCamera;
 };

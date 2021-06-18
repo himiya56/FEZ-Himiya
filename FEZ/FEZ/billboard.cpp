@@ -17,7 +17,6 @@
 //========================================
 bool CBillboard::m_bAdditiveSynthesis = false;
 bool CBillboard::m_bLay = false;
-D3DXVECTOR3	CBillboard::m_pos = {};
 
 //=============================================================================
 // コンストラクタ

@@ -21,6 +21,8 @@ class CRenderer;
 class CInputKeyboard;
 class CCamera;
 class CLight;
+class CPlayer;
+class CCollisionDetection;
 
 //*****************************************************************************
 // マネージャークラス定義
@@ -42,12 +44,15 @@ public:
 	static CRenderer *GetRenderer(void) { return m_pRenderer; }
 	static CInputKeyboard *GetInput(void) { return m_pInput; }
 	static CCamera *GetCamera(void) { return m_pCamera; }
+	static CPlayer *GetPlayer(void) { return m_pPlayer; }
 private:
-	// メンバ変数
+	                                                             // メンバ変数
 	static CRenderer		*m_pRenderer;
 	static CInputKeyboard   *m_pInput;
 	static CCamera			*m_pCamera;
-	static CLight			*m_pLight;                    // ライトのポインタ
+	static CLight			*m_pLight;		                     // ライトのポインタ
+	static CPlayer          *m_pPlayer;
+	static CCollisionDetection *m_CollisionDetection;
 };
 
 #endif

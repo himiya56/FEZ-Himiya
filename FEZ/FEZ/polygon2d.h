@@ -25,19 +25,22 @@ public:
 	CPolygon2D();									// コンストラクタ
 	CPolygon2D(OBJ_TYPE objType);									// コンストラクタ
 	~CPolygon2D();									// デストラクタ
+
 	HRESULT Init(void);								// 初期化処理
 	void Uninit(void);								// 終了処理
 	void Update(void);								// 更新処理
 	void Draw(void);								// 描画処理
+
 	static CPolygon2D *Create(void);				// インスタンス生成
+
 	void BindTexture(const LPDIRECT3DTEXTURE9 pTex); // テクスチャ作成
 	void SetPos(const D3DXVECTOR3 pos);		// 座標設定用
 	void SetCol(const D3DXCOLOR col);
 	void SetRot(const float rot);
 	void SetSize(const float sizey, const float sizex);
 	void SetTexUV(const float leftX, const float rightX, const float topY, const float bottomY);
-	D3DXVECTOR3 GetPosition(void) const;
 	void GetTexUV(float* leftX, float* rightX, float* topY, float* bottomY);
+	D3DXVECTOR3 GetPosition(void) const;
 private:
 	// メンバ変数
 	LPDIRECT3DTEXTURE9		m_pTexture;		// テクスチャへのポインタ

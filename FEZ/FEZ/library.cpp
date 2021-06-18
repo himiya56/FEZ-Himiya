@@ -101,3 +101,14 @@ float Vec3Length(D3DXVECTOR3 *pVec)
 
 	return (float)(len);
 }
+
+//*****************************************************************************
+// “–‚½‚è”»’è‚ðŒvŽZ
+//*****************************************************************************
+bool CollisionDetection(D3DXVECTOR3 PlayerPos, D3DXVECTOR3 PlayerSiz, D3DXVECTOR3 BlockPos, D3DXVECTOR3 BlockSiz) {
+	if (PlayerPos.y - (PlayerSiz.y / 2) >= BlockPos.y + (BlockSiz.y / 2)) {
+		return true;
+	}
+
+	return false;
+}

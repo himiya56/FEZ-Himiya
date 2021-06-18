@@ -5,6 +5,8 @@
 #include "manager.h"
 #include "keyboard.h"
 
+LPDIRECT3DTEXTURE9 CPlayer::m_pTexture = NULL;
+
 CPlayer::CPlayer() {
 	
 }
@@ -14,8 +16,12 @@ CPlayer::~CPlayer() {
 }
 
 HRESULT CPlayer::Init(void) {
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
+
 	CBillboard::Init();
 	m_move = MOVE_SIZ;
+	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/Character1.1.png", &m_pTexture);
+	BindTexture(m_pTexture);
 
 	return S_OK;
 }
@@ -30,26 +36,21 @@ void CPlayer::Update(void) {
 	CCamera::ORIENTATION Orientation = m_pCamera->GetOrientation();
 	m_pos = GetPos();
 
-	if (Orientation == CCamera::ORIENTATION_FRONT && Orientation == CCamera::ORIENTATION_BACK) {
-		m_pos.z = 0;
-	}
-	if (Orientation == CCamera::ORIENTATION_LEFT && Orientation == CCamera::ORIENTATION_RIGHT) {
-		m_pos.x = 0;
-	}
+	//if (Orientation == CCamera::ORIENTATION_FRONT) {
+	//	m_pos.z = -20;
+	//}
+	//if (Orientation == CCamera::ORIENTATION_BACK) {
+	//	m_pos.z = 20;
+	//}
+	//if (Orientation == CCamera::ORIENTATION_LEFT) {
+	//	m_pos.x = -100;
+	//}
+	//if (Orientation == CCamera::ORIENTATION_RIGHT) {
+	//	m_pos.x = 5;
+	//}
 
 	if (m_pCamera->GetRotake() == CCamera::ROTATE_NONE) {
 		switch (Orientation) {
-		case CCamera::ORIENTATION_FRONT:
-			// ←キーで左移動
-			if (pKeyboard->GetKeyboardPress(DIK_LEFT)) {
-				m_pos.x -= m_move;
-			}
-			// →キーで右移動
-			if (pKeyboard->GetKeyboardPress(DIK_RIGHT)) {
-				m_pos.x += m_move;
-			}
-			break;
-
 		case CCamera::ORIENTATION_BACK:
 			// ←キーで左移動
 			if (pKeyboard->GetKeyboardPress(DIK_LEFT)) {
@@ -72,6 +73,17 @@ void CPlayer::Update(void) {
 			}
 			break;
 
+		case CCamera::ORIENTATION_FRONT:
+			// ←キーで左移動
+			if (pKeyboard->GetKeyboardPress(DIK_LEFT)) {
+				m_pos.x -= m_move;
+			}
+			// →キーで右移動
+			if (pKeyboard->GetKeyboardPress(DIK_RIGHT)) {
+				m_pos.x += m_move;
+			}
+			break;
+
 		case CCamera::ORIENTATION_RIGHT:
 			// ←キーで左移動
 			if (pKeyboard->GetKeyboardPress(DIK_LEFT)) {
@@ -90,8 +102,15 @@ void CPlayer::Update(void) {
 		}
 	}
 
+	CollisionDetection();
+
+	SetCol(D3DXCOLOR(0, 0, 0, 255));
 	SetPos(m_pos);
 	CBillboard::Update();
+}
+
+void CPlayer::CollisionDetection(void) {
+
 }
 
 void CPlayer::Draw(void) {

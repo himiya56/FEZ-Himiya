@@ -87,8 +87,8 @@ HRESULT CTestObj::Load(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
-	D3DXLoadMeshFromX(LPCSTR("./data/MODEL/Cube.x"), D3DXMESH_SYSTEMMEM, pDevice, NULL, &m_pBuffMat, NULL, &m_nNumMat, &m_pMesh);
-	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/color.png", &m_pTexture);
+	D3DXLoadMeshFromX(LPCSTR("./data/MODEL/demos_Stage.x"), D3DXMESH_SYSTEMMEM, pDevice, NULL, &m_pBuffMat, NULL, &m_nNumMat, &m_pMesh);
+	//D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/color.png", &m_pTexture);
 
 	return S_OK;
 }

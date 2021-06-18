@@ -23,6 +23,7 @@
 // 前方宣言
 //*****************************************************************************
 class CCamera;
+class CPlayer;
 
 //*****************************************************************************
 // レンダラークラス定義
@@ -43,6 +44,7 @@ private:
 	// メンバ関数
 	void DrawFPS(void);
 	void DrawOrientation(void);
+	void DrawPos(void);
 
 	// メンバ変数
 	LPDIRECT3D9				m_pD3D = NULL;			// Direct3Dオブジェクト
@@ -50,6 +52,7 @@ private:
 	LPD3DXFONT				m_pFont = NULL;			// フォントへのポインタ
 
 	CCamera *m_pCamera;
+	CPlayer *m_pPlayer;
 };
 
 #endif

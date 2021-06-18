@@ -65,6 +65,9 @@
     <ClCompile Include="player.cpp">
       <Filter>ソース ファイル\scene3D</Filter>
     </ClCompile>
+    <ClCompile Include="collisiondetection.cpp">
+      <Filter>ソース ファイル\polygon2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="testObj.h">
@@ -108,6 +111,9 @@
     </ClInclude>
     <ClInclude Include="player.h">
       <Filter>ソース ファイル\scene3D</Filter>
+    </ClInclude>
+    <ClInclude Include="collisiondetection.h">
+      <Filter>ソース ファイル\polygon2D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
