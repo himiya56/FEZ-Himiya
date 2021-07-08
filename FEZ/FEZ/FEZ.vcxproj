@@ -19,32 +19,60 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="button.cpp" />
+    <ClCompile Include="button_any.cpp" />
+    <ClCompile Include="button_exit.cpp" />
+    <ClCompile Include="button_stage1.cpp" />
+    <ClCompile Include="button_stage2.cpp" />
+    <ClCompile Include="button_stage3.cpp" />
+    <ClCompile Include="button_start.cpp" />
+    <ClCompile Include="button_tutorial.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="fade.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="library.cpp" />
     <ClCompile Include="light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="manager.cpp" />
+    <ClCompile Include="mode_game.cpp" />
+    <ClCompile Include="mode_stage_select.cpp" />
+    <ClCompile Include="mode_title.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="polygon2d.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="scene3d.cpp" />
+    <ClCompile Include="stage_select_button_manager.cpp" />
     <ClCompile Include="testObj.cpp" />
+    <ClCompile Include="title_button_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="button.h" />
+    <ClInclude Include="button_any.h" />
+    <ClInclude Include="button_exit.h" />
+    <ClInclude Include="button_stage1.h" />
+    <ClInclude Include="button_stage2.h" />
+    <ClInclude Include="button_stage3.h" />
+    <ClInclude Include="button_start.h" />
+    <ClInclude Include="button_tutorial.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="fade.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="keyboard.h" />
     <ClInclude Include="library.h" />
     <ClInclude Include="light.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="manager.h" />
+    <ClInclude Include="mode_game.h" />
+    <ClInclude Include="mode_stage_select.h" />
+    <ClInclude Include="mode_title.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="polygon2d.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="scene3d.h" />
+    <ClInclude Include="stage_select_button_manager.h" />
     <ClInclude Include="testObj.h" />
+    <ClInclude Include="title_button_manager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{300A427E-392B-4232-BB5C-234F0A2DD353}</ProjectGuid>

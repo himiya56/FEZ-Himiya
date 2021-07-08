@@ -25,6 +25,7 @@ public:
 	typedef enum
 	{
 		OBJ_TYPE_NONE = 0,
+		OBJ_TYPE_BUTTON,
 		OBJ_TYPE_MAX
 	}OBJ_TYPE;
 

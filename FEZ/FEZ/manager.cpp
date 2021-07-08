@@ -15,16 +15,32 @@
 #include "Keyboard.h"
 #include "camera.h"
 #include "light.h"
+#include "fade.h"
+#include "mode_title.h"
+#include "mode_stage_select.h"
+#include "mode_game.h"
+#include "button_any.h"
+#include "button_exit.h"
+#include "button_start.h"
+#include "button_tutorial.h"
+#include "button_stage1.h"
+#include "button_stage2.h"
+#include "button_stage3.h"
 
 #include "testObj.h"
 
 //*****************************************************************************
 // 静的メンバ変数宣言
 //*****************************************************************************
+CManager::MODE  CManager::m_Mode = MODE_NONE;			//モード
+bool CManager::m_bUseFade = false;						//フェードの使用状態
 CRenderer * CManager::m_pRenderer = NULL;
+CSound * CManager::m_pSound = NULL;
 CInputKeyboard * CManager::m_pInput = NULL;
 CCamera * CManager::m_pCamera = NULL;
 CLight *CManager::m_pLight = NULL;
+CGameMode * CManager::m_pGameMode = NULL;
+CFade * CManager::m_pFade = NULL;					//フェードへのポインタ
 
 //=============================================================================
 // コンストラクタ
@@ -66,14 +82,20 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 	}
 
 	m_pCamera = CCamera::Create();
-
+	//もしフェードのポインタがNULLの場合
+	if (m_pFade == NULL)
+	{
+		//フェードの生成処理関数呼び出し
+		m_pFade = CFade::Create(m_Mode);
+	}
 	// テクスチャの読み込み
 	Load();
 
 	CTestObj::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	CTestObj::Create(D3DXVECTOR3(300.0f, 0.0f, -300.0f));
 	CTestObj::Create(D3DXVECTOR3(-300.0f, 0.0f, 300.0f));
-
+	// モードの設定
+	SetMode(MODE_TITLE);
 	return 0;
 }
 
@@ -105,7 +127,16 @@ void CManager::Uninit(void)
 		delete m_pCamera;
 		m_pCamera = NULL;
 	}
-
+	//もしフェードのポインタがNULLではない場合
+	if (m_pFade != NULL)
+	{
+		//フェードの終了処理関数呼び出し
+		m_pFade->Uninit();
+		//フェードのメモリ破棄
+		delete m_pFade;
+		//フェードのポインタをNULLにする
+		m_pFade = NULL;
+	}
 	// テクスチャの破棄
 	Unload();
 }
@@ -128,6 +159,16 @@ void CManager::Update(void)
 	{
 		m_pCamera->Update();
 	}
+	//もしフェードされたら
+	if (m_bUseFade == true)
+	{
+		//もしフェードのポインタがNULLではない場合
+		if (m_pFade != NULL)
+		{
+			//フェードの更新処理関数呼び出し
+			m_pFade->Update();
+		}
+	}
 }
 
 //=============================================================================
@@ -142,12 +183,77 @@ void CManager::Draw(void)
 	}
 }
 
+
+//=============================================================================
+// フェード開始処理関数
+//=============================================================================
+void CManager::StartFade(MODE mode)
+{
+	//モードを設定する
+	m_Mode = mode;
+	//フェードをする
+	m_bUseFade = true;
+}
+
+//=============================================================================
+// フェード停止処理関数
+//=============================================================================
+void CManager::StopFade(void)
+{
+	//フェードをやめる
+	m_bUseFade = false;
+}
+
+//=============================================================================
+// モード設定関数
+//=============================================================================
+void CManager::SetMode(MODE Mode)
+{
+	//オブジェクトの全破棄処理関数呼び出し
+	CObject::ReleaseAll();
+	//モードを設定する
+	m_Mode = Mode;
+	//各モードの処理
+	switch (m_Mode)
+	{
+	case MODE_TITLE:
+		//タイトルモードの生成処理関数呼び出し
+		CTitleMode::Create();
+		break;
+	case MODE_STAGE_SELECT:
+		//ステージ選択モードの生成処理関数呼び出し
+		CStageSelectMode::Create();
+		break;
+	case MODE_GAME_STAGE1:
+		//ゲームモードの生成処理関数呼び出し
+		m_pGameMode = CGameMode::Create(CGameMode::STAGE_1);
+		break;
+	case MODE_GAME_STAGE2:
+		//ゲームモードの生成処理関数呼び出し
+		m_pGameMode = CGameMode::Create(CGameMode::STAGE_2);
+		break;
+	case MODE_GAME_STAGE3:
+		//ゲームモードの生成処理関数呼び出し
+		m_pGameMode = CGameMode::Create(CGameMode::STAGE_3);
+		break;
+	default:
+		break;
+	}
+}
+
 //=============================================================================
 // モデル・テクスチャ読み込み処理
 //=============================================================================
 void CManager::Load(void)
 {
 	CTestObj::Load();
+	CAnyButton::TextureLoad();
+	CExitButton::TextureLoad();
+	CStartButton::TextureLoad();
+	CTutorialButton::TextureLoad();
+	CStage1Button::TextureLoad();
+	CStage2Button::TextureLoad();
+	CStage3Button::TextureLoad();
 }
 
 //=============================================================================
@@ -156,4 +262,11 @@ void CManager::Load(void)
 void CManager::Unload(void)
 {
 	CTestObj::Unload();
+	CAnyButton::TextureUnload();
+	CExitButton::TextureUnload();
+	CStartButton::TextureUnload();
+	CTutorialButton::TextureUnload();
+	CStage1Button::TextureUnload();
+	CStage2Button::TextureUnload();
+	CStage3Button::TextureUnload();
 }
