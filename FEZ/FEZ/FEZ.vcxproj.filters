@@ -68,6 +68,12 @@
     <ClCompile Include="collisiondetection.cpp">
       <Filter>ソース ファイル\polygon2D</Filter>
     </ClCompile>
+    <ClCompile Include="player_hook.cpp">
+      <Filter>ソース ファイル\scene3D</Filter>
+    </ClCompile>
+    <ClCompile Include="sound.cpp">
+      <Filter>ソース ファイル\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="testObj.h">
@@ -114,6 +120,12 @@
     </ClInclude>
     <ClInclude Include="collisiondetection.h">
       <Filter>ソース ファイル\polygon2D</Filter>
+    </ClInclude>
+    <ClInclude Include="player_hook.h">
+      <Filter>ソース ファイル\scene3D</Filter>
+    </ClInclude>
+    <ClInclude Include="sound.h">
+      <Filter>ソース ファイル\Base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

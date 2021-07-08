@@ -30,9 +30,11 @@
     <ClCompile Include="manager.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="player_hook.cpp" />
     <ClCompile Include="polygon2d.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="scene3d.cpp" />
+    <ClCompile Include="sound.cpp" />
     <ClCompile Include="testObj.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -47,9 +49,11 @@
     <ClInclude Include="manager.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="player_hook.h" />
     <ClInclude Include="polygon2d.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="scene3d.h" />
+    <ClInclude Include="sound.h" />
     <ClInclude Include="testObj.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -19,6 +19,7 @@
 #include "testObj.h"
 #include "player.h"
 #include "collisiondetection.h"
+#include "player_hook.h"
 
 //*****************************************************************************
 // ê√ìIÉÅÉìÉoïœêîêÈåæ
@@ -77,9 +78,10 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 	//CTestObj::Create(D3DXVECTOR3(300.0f, 0.0f, -300.0f));
 	//CTestObj::Create(D3DXVECTOR3(-300.0f, 0.0f, 300.0f));
 
-	CCollisionDetection::Create(D3DXVECTOR3(100.0f, 170.0f, 0.0f), D3DXVECTOR3(150.0f, 150.0f, 0.0f), CCamera::ORIENTATION_FRONT);
+	CCollisionDetection::Create(D3DXVECTOR3(100.0f, 170.0f, 0.0f), PLAYER_SIZE, CCamera::ORIENTATION_FRONT);
 
-	m_pPlayer = CPlayer::Create(D3DXVECTOR3(0.0f, 170.0f, 0.0f), D3DXVECTOR3(150.0f, 150.0f, 0.0f));
+	m_pPlayer = CPlayer::Create(D3DXVECTOR3(0.0f, 170.0f, 0.0f), PLAYER_SIZE);
+	CPlayerHook::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), PLAYER_SIZE);
 
 	return 0;
 }
@@ -155,6 +157,7 @@ void CManager::Draw(void)
 void CManager::Load(void)
 {
 	CTestObj::Load();
+	CPlayerHook::Load();
 }
 
 //=============================================================================
@@ -163,4 +166,5 @@ void CManager::Load(void)
 void CManager::Unload(void)
 {
 	CTestObj::Unload();
+	CPlayerHook::Unload();
 }
