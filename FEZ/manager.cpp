@@ -78,7 +78,8 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 	//CTestObj::Create(D3DXVECTOR3(300.0f, 0.0f, -300.0f));
 	//CTestObj::Create(D3DXVECTOR3(-300.0f, 0.0f, 300.0f));
 
-	m_CollisionDetection = CCollisionDetection::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(70.0f, 70.0f, 0.0f));
+	CCollisionDetection::Create(D3DXVECTOR3(0.0f, 0.0f, -20.0f), D3DXVECTOR3(70.0f, 70.0f, 0.0f));
+	CCollisionDetection::Create(D3DXVECTOR3(0.0f, 0.0f, 20.0f), D3DXVECTOR3(0.0f, 70.0f, 70.0f));
 
 	m_pPlayer = CPlayer::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(150.0f, 150.0f, 0.0f));
 

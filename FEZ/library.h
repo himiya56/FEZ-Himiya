@@ -39,8 +39,8 @@
 void Delay(const int nSecond);
 int GetRandom(const int min, const int max);
 int Sum(int nValue, ...);
- char *NumberToChar(const int nNumber);
- char *NumberToChar(const float fNumber);
- float Vec3Length(D3DXVECTOR3 *pVec);
+char *NumberToChar(const int nNumber);
+char *NumberToChar(const float fNumber);
+float Vec3Length(D3DXVECTOR3 *pVec);
 bool CollisionDetectionCalculation(D3DXVECTOR3 PlayerPosOld, D3DXVECTOR3 PlayerPos, D3DXVECTOR3 PlayerSiz, D3DXVECTOR3 BlockPos, D3DXVECTOR3 BlockSiz);
 #endif

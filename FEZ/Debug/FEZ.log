@@ -1,4 +1,37 @@
-﻿  player.cpp
+﻿  testObj.cpp
   c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-  FEZ.vcxproj -> C:\Users\gsp028\Desktop\授業\プログラム\Visual_Studio_2015\Projects\2年\C++\Game Creation Practice\チーム制作\part2\FEZ\Debug\FEZ.exe
-  FEZ.vcxproj -> C:\Users\gsp028\Desktop\授業\プログラム\Visual_Studio_2015\Projects\2年\C++\Game Creation Practice\チーム制作\part2\FEZ\Debug\FEZ.pdb (Full PDB)
+  scene3d.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\gsp028\desktop\授業\共有フォルダ\fez-himiya\fez-himiya-player\fez\scene3d.cpp(123): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+  renderer.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\gsp028\desktop\授業\共有フォルダ\fez-himiya\fez-himiya-player\fez\renderer.cpp(224): warning C4101: 'str': ローカル変数は 1 度も使われていません。
+  polygon2d.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  player.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  object.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  manager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  main.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  light.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  library.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  keyboard.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  input.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  camera.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  collisiondetection.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  billboard.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  コードを生成中...
+c:\users\gsp028\desktop\授業\共有フォルダ\fez-himiya\fez-himiya-player\fez\library.cpp(71): warning C4172: ローカル変数またはテンポラリのアドレスを返します: cString
+c:\users\gsp028\desktop\授業\共有フォルダ\fez-himiya\fez-himiya-player\fez\library.cpp(84): warning C4172: ローカル変数またはテンポラリのアドレスを返します: cString
+  FEZ.vcxproj -> C:\Users\gsp028\Desktop\授業\共有フォルダ\FEZ-Himiya\FEZ-Himiya-Player\Debug\FEZ.exe
+  FEZ.vcxproj -> C:\Users\gsp028\Desktop\授業\共有フォルダ\FEZ-Himiya\FEZ-Himiya-Player\Debug\FEZ.pdb (Full PDB)

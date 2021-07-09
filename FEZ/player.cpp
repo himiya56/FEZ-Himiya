@@ -42,18 +42,22 @@ void CPlayer::Update(void) {
 	m_pos = GetPos();
 	m_move.y -= GRAVITY_SIZ;
 
-	//if (Orientation == CCamera::ORIENTATION_FRONT) {
-	//	m_pos.z = -20;
-	//}
-	//if (Orientation == CCamera::ORIENTATION_BACK) {
-	//	m_pos.z = 20;
-	//}
-	//if (Orientation == CCamera::ORIENTATION_LEFT) {
-	//	m_pos.x = -100;
-	//}
-	//if (Orientation == CCamera::ORIENTATION_RIGHT) {
-	//	m_pos.x = 5;
-	//}
+	if (m_posold.y == 0) {
+		m_posold.y = -1.0f;
+	}
+
+	if (Orientation == CCamera::ORIENTATION_FRONT) {
+		m_pos.z = -20;
+	}
+	if (Orientation == CCamera::ORIENTATION_BACK) {
+		m_pos.z = 20;
+	}
+	if (Orientation == CCamera::ORIENTATION_LEFT) {
+		m_pos.x = -100;
+	}
+	if (Orientation == CCamera::ORIENTATION_RIGHT) {
+		m_pos.x = 5;
+	}
 
 	if (m_pCamera->GetRotake() == CCamera::ROTATE_NONE) {
 		switch (Orientation) {
@@ -138,6 +142,7 @@ void CPlayer::CollisionDetection(void) {
 
 				if (bCollisionDetectionJudge == true) {
 					m_pos.y = pCollisionDetection->GetPos().y + ((pCollisionDetection->GetSiz().y / 2) + (m_siz.y / 2));
+					m_bJumpJudge = true;
 				}
 			}
 

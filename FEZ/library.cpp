@@ -106,8 +106,21 @@ float Vec3Length(D3DXVECTOR3 *pVec)
 // “–‚½‚è”»’è‚ðŒvŽZ
 //*****************************************************************************
 bool CollisionDetectionCalculation(D3DXVECTOR3 PlayerPosOld, D3DXVECTOR3 PlayerPos, D3DXVECTOR3 PlayerSiz, D3DXVECTOR3 BlockPos, D3DXVECTOR3 BlockSiz) {
-	if (PlayerPosOld.y - (PlayerSiz.y / 2) < BlockPos.y + (BlockSiz.y / 2) &&
-		PlayerPos.y - (PlayerSiz.y / 2) >= BlockPos.y + (BlockSiz.y / 2)) {
+	bool bWidthJudge = false;
+	
+	if (PlayerPos.z == BlockPos.z &&
+		PlayerPos.x + (PlayerSiz.x / 2) >= BlockPos.x - (BlockSiz.x / 2) &&
+		PlayerPos.x - (PlayerSiz.x / 2) <= BlockPos.x + (BlockSiz.x / 2) ||
+		PlayerPos.x == BlockPos.x &&
+		PlayerPos.z + (PlayerSiz.z / 2) >= BlockPos.z - (BlockSiz.z / 2) &&
+		PlayerPos.z - (PlayerSiz.z / 2) <= BlockPos.z + (BlockSiz.z / 2)) {
+
+		bWidthJudge = true;
+	}
+
+	if (bWidthJudge == true &&
+		PlayerPosOld.y >= PlayerPos.y &&
+		PlayerPos.y - (PlayerSiz.y / 2) <= BlockPos.y + (BlockSiz.y / 2)) {
 		return true;
 	}
 
