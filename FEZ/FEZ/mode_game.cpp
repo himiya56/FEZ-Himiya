@@ -16,6 +16,9 @@
 #include "keyboard.h"
 //#include "joystick.h"
 #include "mode_game.h"
+#include "player_hook.h"
+#include "player.h"
+#include "testObj.h"
 
 //*****************************************************************************
 // É}ÉNÉçíËã`
@@ -122,6 +125,9 @@ void CGameMode::InitStageCreate(void)
 	switch (m_Stage)
 	{
 	case STAGE_1:
+		CPlayer::Create(D3DXVECTOR3(0.0f, 170.0f, 0.0f), PLAYER_SIZE);
+		CPlayerHook::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), PLAYER_SIZE);
+		CTestObj::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 		break;
 	case STAGE_2:
 		break;

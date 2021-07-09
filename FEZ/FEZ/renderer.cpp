@@ -12,13 +12,13 @@
 #include "object.h"
 
 #include "keyboard.h"
-<<<<<<< HEAD
+
 #include "camera.h"
 #include "manager.h"
 #include "player.h"
-=======
+
 #include "fade.h"
->>>>>>> remotes/origin/taichi
+
 
 //*****************************************************************************
 // Ã“Iƒƒ“ƒo•Ï”éŒ¾

@@ -35,23 +35,18 @@
 //*****************************************************************************
 // 静的メンバ変数宣言
 //*****************************************************************************
-<<<<<<< HEAD
+
 CRenderer *CManager::m_pRenderer = NULL;
 CInputKeyboard *CManager::m_pInput = NULL;
 CCamera *CManager::m_pCamera = NULL;
 CLight *CManager::m_pLight = NULL;
 CPlayer *CManager::m_pPlayer = NULL;
-=======
-CManager::MODE  CManager::m_Mode = MODE_NONE;			//モード
-bool CManager::m_bUseFade = false;						//フェードの使用状態
-CRenderer * CManager::m_pRenderer = NULL;
+CManager::MODE  CManager::m_Mode = MODE_NONE;		//モード
+bool CManager::m_bUseFade = false;					//フェードの使用状態
 CSound * CManager::m_pSound = NULL;
-CInputKeyboard * CManager::m_pInput = NULL;
-CCamera * CManager::m_pCamera = NULL;
-CLight *CManager::m_pLight = NULL;
 CGameMode * CManager::m_pGameMode = NULL;
 CFade * CManager::m_pFade = NULL;					//フェードへのポインタ
->>>>>>> remotes/origin/taichi
+
 
 //=============================================================================
 // コンストラクタ
@@ -103,21 +98,17 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 	Load();
 
 	CTestObj::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-<<<<<<< HEAD
+
 	//CTestObj::Create(D3DXVECTOR3(300.0f, 0.0f, -300.0f));
 	//CTestObj::Create(D3DXVECTOR3(-300.0f, 0.0f, 300.0f));
 
 	CCollisionDetection::Create(D3DXVECTOR3(100.0f, 170.0f, 0.0f), PLAYER_SIZE, CCamera::ORIENTATION_FRONT);
 
 	m_pPlayer = CPlayer::Create(D3DXVECTOR3(0.0f, 170.0f, 0.0f), PLAYER_SIZE);
-	CPlayerHook::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), PLAYER_SIZE);
 
-=======
-	CTestObj::Create(D3DXVECTOR3(300.0f, 0.0f, -300.0f));
-	CTestObj::Create(D3DXVECTOR3(-300.0f, 0.0f, 300.0f));
 	// モードの設定
 	SetMode(MODE_TITLE);
->>>>>>> remotes/origin/taichi
+
 	return 0;
 }
 
@@ -269,9 +260,7 @@ void CManager::SetMode(MODE Mode)
 void CManager::Load(void)
 {
 	CTestObj::Load();
-<<<<<<< HEAD
 	CPlayerHook::Load();
-=======
 	CAnyButton::TextureLoad();
 	CExitButton::TextureLoad();
 	CStartButton::TextureLoad();
@@ -279,7 +268,6 @@ void CManager::Load(void)
 	CStage1Button::TextureLoad();
 	CStage2Button::TextureLoad();
 	CStage3Button::TextureLoad();
->>>>>>> remotes/origin/taichi
 }
 
 //=============================================================================
@@ -288,9 +276,7 @@ void CManager::Load(void)
 void CManager::Unload(void)
 {
 	CTestObj::Unload();
-<<<<<<< HEAD
 	CPlayerHook::Unload();
-=======
 	CAnyButton::TextureUnload();
 	CExitButton::TextureUnload();
 	CStartButton::TextureUnload();
@@ -298,5 +284,4 @@ void CManager::Unload(void)
 	CStage1Button::TextureUnload();
 	CStage2Button::TextureUnload();
 	CStage3Button::TextureUnload();
->>>>>>> remotes/origin/taichi
 }

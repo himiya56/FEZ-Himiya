@@ -25,11 +25,8 @@ public:
 	typedef enum
 	{
 		OBJ_TYPE_NONE = 0,
-<<<<<<< HEAD
 		OBJ_TYPE_HOOK,
-=======
 		OBJ_TYPE_BUTTON,
->>>>>>> remotes/origin/taichi
 		OBJ_TYPE_MAX
 	}OBJ_TYPE;
 

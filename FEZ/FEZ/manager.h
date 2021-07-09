@@ -21,14 +21,11 @@ class CRenderer;
 class CInputKeyboard;
 class CCamera;
 class CLight;
-<<<<<<< HEAD
 class CPlayer;
 class CCollisionDetection;
-=======
 class CSound;
 class CGameMode;
 class CFade;
->>>>>>> remotes/origin/taichi
 
 //*****************************************************************************
 // マネージャークラス定義
@@ -63,11 +60,8 @@ public:
 	static CRenderer *GetRenderer(void) { return m_pRenderer; }
 	static CInputKeyboard *GetInput(void) { return m_pInput; }
 	static CCamera *GetCamera(void) { return m_pCamera; }
-<<<<<<< HEAD
+
 	static CPlayer *GetPlayer(void) { return m_pPlayer; }
-private:
-	                                                             // メンバ変数
-=======
 	static CSound *GetSound(void) { return m_pSound; }
 	static CGameMode *GetGameMode(void) { return m_pGameMode; }
 	static CFade * GetFade(void) { return m_pFade; }
@@ -75,20 +69,19 @@ private:
 	// メンバ変数
 	static MODE				 m_Mode;					  //モード
 	static bool				 m_bUseFade;				  //フェードの使用状態
->>>>>>> remotes/origin/taichi
+
 	static CRenderer		*m_pRenderer;
 	static CSound           *m_pSound;
 	static CInputKeyboard   *m_pInput;
 	static CCamera			*m_pCamera;
-<<<<<<< HEAD
+
 	static CLight			*m_pLight;		                     // ライトのポインタ
 	static CPlayer          *m_pPlayer;
 	static CCollisionDetection *m_CollisionDetection;
-=======
-	static CLight			*m_pLight;                    // ライトのポインタ
+
 	static CGameMode		*m_pGameMode;				  // ゲームモードのポインタ
 	static CFade			*m_pFade;					  //フェードのポインタ
->>>>>>> remotes/origin/taichi
+
 };
 
 #endif
