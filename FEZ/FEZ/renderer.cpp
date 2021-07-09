@@ -12,9 +12,13 @@
 #include "object.h"
 
 #include "keyboard.h"
+<<<<<<< HEAD
 #include "camera.h"
 #include "manager.h"
 #include "player.h"
+=======
+#include "fade.h"
+>>>>>>> remotes/origin/taichi
 
 //*****************************************************************************
 // 静的メンバ変数宣言
@@ -189,13 +193,20 @@ void CRenderer::Draw(void)
 {
 	// バックバッファ＆Ｚバッファのクリア
 	m_pD3DDevice->Clear(0, NULL, (D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL), D3DCOLOR_RGBA(169, 206, 236, 255), 1.0f, 0);
-
+	//フェードの取得
+	CFade * pFade = CManager::GetFade();
 	// Direct3Dによる描画の開始
 	if (SUCCEEDED(m_pD3DDevice->BeginScene()))
 	{
 		//g_pMask->Draw();
 
 		CObject::DrawAll();
+		//もしフェードがnullptrじゃない場合
+		if (pFade != nullptr)
+		{
+			//フェードの描画
+			pFade->Draw();
+		}
 
 #ifdef _DEBUG
 		// FPS表示

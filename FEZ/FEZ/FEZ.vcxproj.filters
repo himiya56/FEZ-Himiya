@@ -21,6 +21,12 @@
     <Filter Include="ソース ファイル\input">
       <UniqueIdentifier>{fb95185a-8d02-46ca-beb4-e91c51617404}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Mode">
+      <UniqueIdentifier>{32d051d4-21be-4312-b6a7-f05f857334f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\button">
+      <UniqueIdentifier>{bdb59b5a-f03a-4f8d-906e-0c79e967b43b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="testObj.cpp">
@@ -59,6 +65,7 @@
     <ClCompile Include="library.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="billboard.cpp">
       <Filter>ソース ファイル\scene3D</Filter>
     </ClCompile>
@@ -74,6 +81,50 @@
     <ClCompile Include="sound.cpp">
       <Filter>ソース ファイル\Base</Filter>
     </ClCompile>
+=======
+    <ClCompile Include="mode_title.cpp">
+      <Filter>ソース ファイル\Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="mode_game.cpp">
+      <Filter>ソース ファイル\Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="button.cpp">
+      <Filter>ソース ファイル\button</Filter>
+    </ClCompile>
+    <ClCompile Include="button_any.cpp">
+      <Filter>ソース ファイル\button</Filter>
+    </ClCompile>
+    <ClCompile Include="title_button_manager.cpp">
+      <Filter>ソース ファイル\button</Filter>
+    </ClCompile>
+    <ClCompile Include="button_start.cpp">
+      <Filter>ソース ファイル\button</Filter>
+    </ClCompile>
+    <ClCompile Include="button_exit.cpp">
+      <Filter>ソース ファイル\button</Filter>
+    </ClCompile>
+    <ClCompile Include="button_tutorial.cpp">
+      <Filter>ソース ファイル\button</Filter>
+    </ClCompile>
+    <ClCompile Include="stage_select_button_manager.cpp">
+      <Filter>ソース ファイル\button</Filter>
+    </ClCompile>
+    <ClCompile Include="mode_stage_select.cpp">
+      <Filter>ソース ファイル\Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="fade.cpp">
+      <Filter>ソース ファイル\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="button_stage1.cpp">
+      <Filter>ソース ファイル\button</Filter>
+    </ClCompile>
+    <ClCompile Include="button_stage2.cpp">
+      <Filter>ソース ファイル\button</Filter>
+    </ClCompile>
+    <ClCompile Include="button_stage3.cpp">
+      <Filter>ソース ファイル\button</Filter>
+    </ClCompile>
+>>>>>>> remotes/origin/taichi
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="testObj.h">
@@ -112,6 +163,7 @@
     <ClInclude Include="library.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="billboard.h">
       <Filter>ソース ファイル\scene3D</Filter>
     </ClInclude>
@@ -127,5 +179,49 @@
     <ClInclude Include="sound.h">
       <Filter>ソース ファイル\Base</Filter>
     </ClInclude>
+=======
+    <ClInclude Include="mode_title.h">
+      <Filter>ソース ファイル\Mode</Filter>
+    </ClInclude>
+    <ClInclude Include="mode_game.h">
+      <Filter>ソース ファイル\Mode</Filter>
+    </ClInclude>
+    <ClInclude Include="button.h">
+      <Filter>ソース ファイル\button</Filter>
+    </ClInclude>
+    <ClInclude Include="button_any.h">
+      <Filter>ソース ファイル\button</Filter>
+    </ClInclude>
+    <ClInclude Include="title_button_manager.h">
+      <Filter>ソース ファイル\button</Filter>
+    </ClInclude>
+    <ClInclude Include="button_start.h">
+      <Filter>ソース ファイル\button</Filter>
+    </ClInclude>
+    <ClInclude Include="button_exit.h">
+      <Filter>ソース ファイル\button</Filter>
+    </ClInclude>
+    <ClInclude Include="button_tutorial.h">
+      <Filter>ソース ファイル\button</Filter>
+    </ClInclude>
+    <ClInclude Include="stage_select_button_manager.h">
+      <Filter>ソース ファイル\button</Filter>
+    </ClInclude>
+    <ClInclude Include="mode_stage_select.h">
+      <Filter>ソース ファイル\Mode</Filter>
+    </ClInclude>
+    <ClInclude Include="fade.h">
+      <Filter>ソース ファイル\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="button_stage1.h">
+      <Filter>ソース ファイル\button</Filter>
+    </ClInclude>
+    <ClInclude Include="button_stage2.h">
+      <Filter>ソース ファイル\button</Filter>
+    </ClInclude>
+    <ClInclude Include="button_stage3.h">
+      <Filter>ソース ファイル\button</Filter>
+    </ClInclude>
+>>>>>>> remotes/origin/taichi
   </ItemGroup>
 </Project>
